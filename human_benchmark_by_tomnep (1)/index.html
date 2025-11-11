@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Human Benchmark</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="title">Human Benchmark</h1>
+      <p class="subtitle">Test your brain and reflexes</p>
+    </header>
+
+    <!-- Navigation / Views -->
+    <nav class="nav">
+      <button data-view="home" class="nav-btn active">Home</button>
+      <button data-view="reaction" class="nav-btn">Reaction Time</button>
+      <button data-view="chimp" class="nav-btn">Chimp Test</button>
+      <button data-view="typing" class="nav-btn">Typing Speed</button>
+      <button data-view="sequence" class="nav-btn">Sequence Memory</button>
+      <button data-view="dashboard" class="nav-btn">Results</button>
+    </nav>
+
+    <main class="main">
+      <!-- Home -->
+      <section id="view-home" class="view active">
+        <div class="card">
+          <h2>Welcome</h2>
+          <p>Choose a test to start. Each test stores best results locally.</p>
+          <div class="grid">
+            <button class="large" data-view="reaction">Reaction Time Test</button>
+            <button class="large" data-view="chimp">Chimp Test</button>
+            <button class="large" data-view="typing">Typing Speed Test</button>
+            <button class="large" data-view="sequence">Sequence Memory Test</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reaction Time -->
+      <section id="view-reaction" class="view">
+        <div class="card">
+          <h2>Reaction Time</h2>
+          <p>Click the box as soon as it turns green.</p>
+
+          <div id="reaction-area" class="reaction-area">
+            <div id="reaction-box" class="reaction-box status-wait">Wait...</div>
+          </div>
+
+          <div class="controls">
+            <div id="reaction-result" class="result"></div>
+            <div id="reaction-warning" class="warning"></div>
+            <div class="row">
+              <button id="reaction-restart">Try Again</button>
+              <button id="reaction-back" class="secondary" data-view="home">Back</button>
+            </div>
+            <div class="small">Best: <span id="reaction-best">—</span> ms</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chimp Test -->
+      <section id="view-chimp" class="view">
+        <div class="card">
+          <h2>Chimp Test</h2>
+          <p>Memorize numbers then click them in ascending order.</p>
+
+          <div id="chimp-board" class="chimp-board"></div>
+
+          <div class="controls">
+            <div id="chimp-info" class="result">Level: <span id="chimp-level">1</span></div>
+            <div id="chimp-message" class="warning"></div>
+            <div class="row">
+              <button id="chimp-start">Start</button>
+              <button id="chimp-back" class="secondary" data-view="home">Back</button>
+            </div>
+            <div class="small">Best Level: <span id="chimp-best">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Typing Speed -->
+      <section id="view-typing" class="view">
+        <div class="card typing-card">
+          <h2>Typing Speed Test</h2>
+          <p>Type the given text as accurately and quickly as possible.</p>
+
+          <div class="typing-samples">
+            <label for="sample-select">Sample:</label>
+            <select id="sample-select"></select>
+            <button id="typing-restart" class="small-btn">Restart</button>
+          </div>
+
+          <div class="typing-box">
+            <div id="typing-text" class="typing-text"></div>
+            <textarea id="typing-input" placeholder="Start typing here..." rows="5" autofocus></textarea>
+          </div>
+
+          <div class="controls">
+            <div id="typing-stats" class="result"></div>
+            <div class="row">
+              <button id="typing-stop">Finish</button>
+              <button id="typing-back" class="secondary" data-view="home">Back</button>
+            </div>
+            <div class="small">Best WPM: <span id="typing-best">—</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard -->
+      <section id="view-dashboard" class="view">
+        <div class="card">
+          <h2>Results Dashboard</h2>
+          <div class="dashboard-grid">
+            <div class="dash-item">
+              <h3>Reaction</h3>
+              <div>Best: <span id="dash-reaction">—</span> ms</div>
+            </div>
+            <div class="dash-item">
+              <h3>Chimp</h3>
+              <div>Best Level: <span id="dash-chimp">—</span></div>
+            </div>
+            <div class="dash-item">
+              <h3>Typing</h3>
+              <div>Best WPM: <span id="dash-typing">—</span></div>
+            </div>
+            <div class="dash-item">
+              <h3>Sequence</h3>
+              <div>Best Level: <span id="dash-sequence">—</span></div>
+            </div>
+          </div>
+          <div class="row">
+            <button id="clear-scores" class="danger">Clear Scores</button>
+            <button data-view="home" class="secondary">Back</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sequence Memory Test -->
+      <section id="view-sequence" class="view">
+        <div class="card">
+          <h2>Sequence Memory Test</h2>
+          <p>Watch the sequence of cells light up, then repeat the sequence by clicking cells in order.</p>
+
+          <div id="sequence-board" class="chimp-board"></div>
+
+          <div class="controls">
+            <div id="sequence-info" class="result">Level: <span id="sequence-level">1</span></div>
+            <div id="sequence-message" class="warning"></div>
+            <div class="row">
+              <button id="sequence-start">Start</button>
+              <button id="sequence-back" class="secondary" data-view="home">Back</button>
+            </div>
+            <div class="small">Best Level: <span id="sequence-best">—</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small>Minimal Human Benchmark • Local scores only</small>
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
